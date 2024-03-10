@@ -1,8 +1,9 @@
 <? include 'handlers/api.php'; ?>
-<? //include 'handlers/favourites.php';     ?>
+<? //include 'handlers/favourites.php';      ?>
 
 <?php
 
+// debug($_SESSION['data']);
 /*
 // Создаем новый ресурс cURL
 $ch = curl_init();
@@ -84,7 +85,7 @@ var_dump($data);
 </head>
 
 <body>
-    <? //debug($random_posts);                                                                                                           ?>
+    <? //debug($random_posts);                                                                                                                 ?>
     <div id="wrapper">
         <header class="tech-header header">
             <div class="container-fluid">

@@ -1,10 +1,12 @@
 <?
-
+session_start();
 // Считывание json через include
+/*
 ob_start();
 include 'assets/health.json';
 $data = ob_get_clean();
 $data = json_decode($data, true);
+*/
 //  var_dump($data['articles'][0]);
 
 //Считывание через file_get_contents
@@ -67,6 +69,8 @@ function get_data(&$categories, &$data)
       $data[$category] = $resp['articles'];
     }
   }
+
+  $_SESSION['data'] = json_encode($data);
 }
 
 function get_random_categories($max, $min = 0)
@@ -94,12 +98,15 @@ function get_random_posts(&$random_categories, &$data, &$categories, &$random_po
   }
 }
 
+if (!empty($_SESSION['data'])) {
+  $data = json_decode($_SESSION['data'], true);
+} else {
+  get_data($categories, $data); // Получаем данные с сервера
+}
 
-get_data($categories, $data); // Получаем данные с сервера
 
 $random_categories = get_random_categories(count($data)); // [0,0,4] // Получаем рандом категории
 get_random_posts($random_categories, $data, $categories, $random_posts); // Рандом посты
-
 
 // debug($random_posts);
 

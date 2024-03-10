@@ -14,7 +14,7 @@ document.querySelector(".blog-list").addEventListener("click", function(e) {
       contentType: 'application/json',
       body: JSON.stringify(data)
     }).then(function(resp) {
-      return resp.json();
+      return resp.text();
     }).then(function(res) {
       console.log(res);
     })

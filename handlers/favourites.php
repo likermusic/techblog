@@ -1,18 +1,20 @@
 <?
-//$db = include_once 'utils/db.php';
+session_start();
+// include_once '../utils/pathes.php';
+// $db = include_once(ROOT . "/utils/db.php");
+$pdo = include_once "../utils/db.php";
+
+// var_dump(__DIR__);
 
 // debug($_POST);
 // $status = 'ok';
 
-$data = file_get_contents("php://input");
-if (!empty($data)) {
-  $data = json_decode($data, true);
-  if ($data['param'] === 'addFavourite') {
-    // addFavourite($data);
+$request_data = file_get_contents("php://input");
+if (!empty($request_data)) {
+  $request_data_params = json_decode($request_data, true);
+  if ($request_data_params['param'] === 'addFavourite') {
+    echo $res = addFavourite($pdo, $request_data_params);
   }
-
-
-
 }
 
 
@@ -20,14 +22,33 @@ if (!empty($data)) {
 
 
 
-/*
-if ($db == false) {
-  die('Ошибка подключения к БД');
-}
 
-if (isset($_GET['url']) and !empty($_GET['url']) and isset($_GET['category']) and !empty($_GET['category'])) {
-  $category = $_GET['category'];
-  $url = $_GET['url'];
+// if ($db == false) {
+//   die('Ошибка подключения к БД');
+// }
+
+// if (isset($_GET['url']) and !empty($_GET['url']) and isset($_GET['category']) and !empty($_GET['category'])) {
+//   $category = $_GET['category'];
+//   $url = $_GET['url'];
+
+//   $key = array_search($url, array_column($data[$category], 'url'));
+//   if (!$key) {
+//     die();
+//   }
+
+//   $post = $data[$category][$key];
+// }
+
+
+function addFavourite(&$pdo, &$param_post)
+{
+  $data = json_decode($_SESSION['data'], true);
+
+  if (empty($data))
+    die('Ошибка! Перезагрузите страницу');
+
+  $category = $param_post['category'];
+  $url = $param_post['url'];
 
   $key = array_search($url, array_column($data[$category], 'url'));
   if (!$key) {
@@ -36,12 +57,10 @@ if (isset($_GET['url']) and !empty($_GET['url']) and isset($_GET['category']) an
 
   $post = $data[$category][$key];
 
-  
-  function addFavourite(&$pdo, &$post)
-  {
-
+  try {
     $stmt = $pdo->prepare("INSERT INTO favourites (author,title,description,url,urlToImage,publishedAt,content) VALUES (:author,:title,:description,:url,:urlToImage,:publishedAt,:content)");
 
+    // $stmt->setAttribute()
     $stmt->execute([
       'author' => $post['author'],
       'title' => $post['title'],
@@ -51,11 +70,14 @@ if (isset($_GET['url']) and !empty($_GET['url']) and isset($_GET['category']) an
       'publishedAt' => $post['publishedAt'],
       'content' => $post['content']
     ]);
-
-    header('Location: ' . $_SERVER['PHP_SELF']);
+    return 'true';
+  } catch (PDOException $err) {
+    echo 'false';
   }
 
-  addFavourite($pdo, $post);
-
+  // header('Location: ' . $_SERVER['PHP_SELF']);
 }
-*/
+
+// addFavourite($pdo, $post);
+
+// }

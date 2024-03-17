@@ -16,3 +16,5 @@ if (!empty ($_SESSION['favoirite_posts'])) {
     $_SESSION['favoirite_posts'] = $favoirite_posts;
   }
 }
+
+

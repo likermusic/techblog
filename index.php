@@ -1,5 +1,5 @@
 <? include 'handlers/api.php'; ?>
-<? include 'handlers/actions.php'; ?>
+<? include 'handlers/get_favourite_urls.php'; ?>
 
 
 <?php
@@ -522,7 +522,7 @@ var_dump($data);
                         </ul>
                         <ul class="navbar-nav mr-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="tech-favourites.html"><img style="filter: invert(100%);"
+                                <a class="nav-link" href="tech-favourites.php"><img style="filter: invert(100%);"
                                         src="images/icons8-favorite-folder-50.png" width="30"></a>
                             </li>
                         </ul>

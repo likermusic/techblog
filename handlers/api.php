@@ -80,7 +80,7 @@ function get_random_categories($max, $min = 0)
 
   while ($i < 3) {
     $random_category = rand($min, $max - 1); // 0-6
-    if (empty($random_categories) or !in_array($random_category, $random_categories)) {
+    if (empty ($random_categories) or !in_array($random_category, $random_categories)) {
       array_push($random_categories, $random_category);
       $i++;
     }
@@ -98,7 +98,7 @@ function get_random_posts(&$random_categories, &$data, &$categories, &$random_po
   }
 }
 
-if (!empty($_SESSION['data'])) {
+if (!empty ($_SESSION['data'])) {
   $data = json_decode($_SESSION['data'], true);
 } else {
   get_data($categories, $data); // Получаем данные с сервера

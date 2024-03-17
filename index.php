@@ -1,5 +1,6 @@
 <? include 'handlers/api.php'; ?>
-<? //include 'handlers/favourites.php';      ?>
+<? include 'handlers/actions.php'; ?>
+
 
 <?php
 
@@ -85,7 +86,7 @@ var_dump($data);
 </head>
 
 <body>
-    <? //debug($random_posts);                                                                                                                 ?>
+    <? //debug($random_posts);                                                                                                                      ?>
     <div id="wrapper">
         <header class="tech-header header">
             <div class="container-fluid">
@@ -605,6 +606,7 @@ var_dump($data);
                                     ?>
                                     <? $url = @getimagesize($post['urlToImage']) ? $post['urlToImage'] : 'images/noimg.png' ?>
 
+
                                     <div class="blog-box row">
                                         <div class="col-md-4">
                                             <div class="post-media">
@@ -618,6 +620,9 @@ var_dump($data);
                                                 to
                                                 favourites
                                             </a> -->
+
+                                            <? //$post['url']    ?>
+
                                             <a href="" style="cursor: pointer" class="btn btn-primary add-favourite"
                                                 data-category="<?= $cat ?>" data-url="<?= $post['url'] ?>">Add
                                                 to
@@ -718,7 +723,7 @@ var_dump($data);
     <script src="js/tether.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
-    <script src="handlers/favourites.js"></script>
+    <script src="handlers/handler.js"></script>
 </body>
 
 </html>

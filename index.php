@@ -3,7 +3,6 @@
 
 
 <?php
-
 // debug($_SESSION['data']);
 /*
 // Создаем новый ресурс cURL
@@ -86,7 +85,7 @@ var_dump($data);
 </head>
 
 <body>
-    <? //debug($random_posts);                                                                                                                      ?>
+    <? //debug($random_posts);                                                                                                                         ?>
     <div id="wrapper">
         <header class="tech-header header">
             <div class="container-fluid">
@@ -605,7 +604,9 @@ var_dump($data);
                                     $post = $data[$cat][$post_ind];
                                     ?>
                                     <? $url = @getimagesize($post['urlToImage']) ? $post['urlToImage'] : 'images/noimg.png' ?>
-
+                                    <? 
+                                    $is_in_favourites = array_search($post['url'], $favoirite_posts, true); 
+                                    ?>
 
                                     <div class="blog-box row">
                                         <div class="col-md-4">
@@ -621,13 +622,21 @@ var_dump($data);
                                                 favourites
                                             </a> -->
 
-                                            <? //$post['url']    ?>
+                                            <? //$post['url']       ?>
 
+                                            <? if ($is_in_favourites) : ?>
+                                                <a href="" style="background:green !important;" class="btn add-favourite disabled"
+                                                data-category="<?= $cat ?>" data-url="<?= $post['url'] ?>">
+                                                In favourite ✌️
+                                                </a> 
+                                            <? else: ?>                                       
                                             <a href="" style="cursor: pointer" class="btn btn-primary add-favourite"
-                                                data-category="<?= $cat ?>" data-url="<?= $post['url'] ?>">Add
+                                                data-category="<?= $cat ?>" data-url="<?= $post['url'] ?>">
+                                                Add
                                                 to
                                                 favourites
                                             </a>
+                                            <? endif;?>
                                         </div><!-- end col -->
 
                                         <div class="blog-meta big-meta col-md-8">

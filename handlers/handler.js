@@ -24,7 +24,7 @@ document.querySelector(".blog-list").addEventListener("click", function (e) {
           e.target.classList.remove("btn-primary");
           e.target.classList.add("disabled");
           e.target.style.cssText = "background:green !important;";
-          e.target.textContent = "In favourite ✌️";
+          e.target.textContent = "In favourites ✌️";
         }
       });
   }

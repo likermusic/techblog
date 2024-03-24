@@ -4,20 +4,33 @@ session_start();
 // $db = include_once(ROOT . "/utils/db.php");
 $pdo = include_once "../utils/db.php";
 
-// var_dump(__DIR__);
-
-// debug($_POST);
-// $status = 'ok';
 
 $request_data = file_get_contents("php://input");
 if (!empty ($request_data)) {
   $request_data_params = json_decode($request_data, true);
   if ($request_data_params['param'] === 'addFavourite') {
     echo $res = addFavourite($pdo, $request_data_params);
+  } else if ($request_data_params['param'] === 'getFavourites') {
+    $posts = getFavourites($pdo);
+    if ($posts) {
+      echo json_encode($posts);
+    } else {
+      echo 'false';
+    }
   }
 }
 
-
+function getFavourites($pdo)
+{
+  try {
+    $stmt = $pdo->prepare("SELECT * FROM favourites");
+    $stmt->execute();
+    $favourite_posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $favourite_posts;
+  } catch (PDOException $err) {
+    return false;
+  }
+}
 
 
 

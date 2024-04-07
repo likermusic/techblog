@@ -20,18 +20,24 @@ document.querySelector("#sort").addEventListener("change", function (e) {
         });
 
         function isImage(url) {
-          fetch(url).then((resp) => {
-            if (resp.ok === true) {
-              return true;
-            } else {
-              return false;
-            }
-          });
+          // fetch(url, {
+          //   mode: "cors",
+          // }).then((resp) => {
+          //   if (resp.ok === true) {
+          //     return true;
+          //   } else {
+          //     return false;
+          //   }
+          // });
+
+          return url;
         }
 
         document.querySelector(".blog-list").innerHTML = "";
         let out = "";
         res.forEach((post) => {
+          // console.log(isImage(post.urlToImage));
+
           // const imageExists = await isImage(post.urlToImage);
           // const url = imageExists ? post.urlToImage : "../images/noimg.png";
 
@@ -67,10 +73,9 @@ document.querySelector("#sort").addEventListener("change", function (e) {
           </div>
       </div>
           `;
-
-          out += post;
+          // ЗДЕСЬ ПЛЮСАНУЛИ НЕ ТУ ПЕРЕМ
+          out += postOutput;
         });
-
         document
           .querySelector(".blog-list")
           .insertAdjacentHTML("afterbegin", out);

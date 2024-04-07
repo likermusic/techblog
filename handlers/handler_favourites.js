@@ -19,34 +19,17 @@ document.querySelector("#sort").addEventListener("change", function (e) {
           }
         });
 
-        function isImage(url) {
-          // fetch(url, {
-          //   mode: "cors",
-          // }).then((resp) => {
-          //   if (resp.ok === true) {
-          //     return true;
-          //   } else {
-          //     return false;
-          //   }
-          // });
-
-          return url;
-        }
-
         document.querySelector(".blog-list").innerHTML = "";
         let out = "";
         res.forEach((post) => {
-          // console.log(isImage(post.urlToImage));
-
-          // const imageExists = await isImage(post.urlToImage);
-          // const url = imageExists ? post.urlToImage : "../images/noimg.png";
-
           const postOutput = `
           <div class="blog-box row">
           <div class="col-md-4">
               <div class="post-media">
                   <a href="${post.url}" title="">
-                      <img src="${post.urlToImage}" class="img-fluid">
+                      <img src="${
+                        post.urlToImage || "images/noimg.png"
+                      }" class="img-fluid" alt="Не загрузилась!">
                       <div class="hovereffect"></div>
                   </a>
               </div>
